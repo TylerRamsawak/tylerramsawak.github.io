@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <link rel="stylesheet" href="styles.css">
+    </head>
+    <audio id="startup" src="sounds/StartupPowerMac.wav"></audio>
+    <!--https://froods.ca/~dschaub/sound.html-->
+    <body>
+        <div id="screen">
+            <nav id="menubar">
+                <span class="menubar-dropdown">
+                    About
+                </span>
+                <span class="menubar-dropdown">
+                    Projects
+                </span>
+                <span class="menubar-dropdown">
+                    Hobbies
+                </span>
+                <span class="menubar-dropdown">
+                    Emo Music
+                </span>
+            </nav>
+            <div id="viewport">
+                <!--This is the pretend desktop-->
+                <div id="window">
+                    <div id="titlebar">
+                        <img src="icons/close.bmp">
+                        <span id="taskbar-title">Title</span>
+                        <img src="icons/maximize.bmp">
+                    </div>
+                    <!--This is where meaningful content goes-->
+                    hello im content
+                </div>
+            </div>
+        </div>
+    </body>
+</html>
+
+<script>
+window.addEventListener("DOMContentLoaded", () => {
+    const audio = document.getElementById("startup");
+    audio.play();
+});
+</script>
+
+<script>
+const backgrounds = [
+  "128.png",
+  "129.png",
+  "130.png",
+  "131.png",
+  "132.png",
+  "133.png",
+  "134.png",
+  "136.png",
+  "137.png",
+  "139.png",
+  "141.png",
+  "142.png",
+  "144.png",
+  "145.png",
+  "146.png",
+  "147.png",
+  "148.png",
+  "149.png",
+  "150.png",
+  "151.png",
+  "547.png",
+  "870.png",
+  "987.png",
+  "1111.png",
+  "1969.png",
+  "1970.png"
+];
+
+const randomBackground = backgrounds[Math.floor(Math.random() * backgrounds.length)];
+let viewport = document.getElementById("viewport");
+console.log(viewport);
+viewport.style.backgroundImage = `url('backgrounds/${randomBackground}')`;
+</script>
