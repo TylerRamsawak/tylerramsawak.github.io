@@ -23,6 +23,12 @@ body {
     position: relative;
 }
 
+footer {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
 #screen {
     position:relative;
     display: flex;
@@ -72,6 +78,15 @@ body {
   );
 }
 
+#viewport {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    background-image: url("backgrounds/10042.png");
+    background-repeat: repeat;
+    height: 100%;
+}
+
 #menubar {
     display: flex;
     align-items: center;
@@ -82,21 +97,41 @@ body {
     font-size: 1.5rem;
 }
 
-.menubar-dropdown {
+.menubar-items {
     margin-left: 20px;
     user-select: none;
 }
 
-.menubar-dropdown:hover {
+.menubar-items:hover {
     color: white;
     background-color: black;
+    cursor: url("cursors/hand.cur"), auto;
 }
 
-#viewport {
-    position: relative;
-    background-image: url("backgrounds/10042.png");
-    background-repeat: repeat;
-    height: 100%;
+#menubar img {
+    margin-left: 20px;
+    height: 20px;
+}
+
+#clock {
+    margin-left: auto;
+    margin-right: 20px;
+    user-select: none;
+}
+
+.flash {
+    animation: flash 0.1s steps(2) 4;
+}
+
+@keyframes flash {
+    from {
+        background-color: white;
+        color: black;
+    }
+    to   {
+        background-color: black;
+        color: white;
+    }
 }
 
 #window {
@@ -122,7 +157,22 @@ body {
     background-size: contain;
 }
 
-#taskbar-title {
+.content {
+    font-family: "Chicago", auto;
+    padding: 10px;
+}
+
+.titlebar-controls {
+    image-rendering: pixelated;
+    min-width: 16;
+    min-height: 16px;
+    margin-right: 15px;
+    margin-left: 15px;
+    border: 2px solid #F2F4F3;
+    user-select: none;
+}
+
+#titlebar-title {
     margin-left: auto;
     margin-right: auto;
     background-color: #F2F4F3;
@@ -133,4 +183,11 @@ body {
     display: flex;
     align-items: center;
     user-select: none;
+}
+
+/*CONTENT STYLING*/
+.about-block {
+    color: red;
+    display: flex;
+    align-items: center;
 }

@@ -8,35 +8,85 @@
     <body>
         <div id="screen">
             <nav id="menubar">
-                <span class="menubar-dropdown">
-                    About
+                <img src="icons/logo2.bmp" draggable="false">
+                <span class="menubar-items" id="about" style="text-decoration: underline;">
+                    About Me
                 </span>
-                <span class="menubar-dropdown">
+                <span class="menubar-items" id="projects">
                     Projects
                 </span>
-                <span class="menubar-dropdown">
+                <span class="menubar-items" id="hobbies">
                     Hobbies
                 </span>
-                <span class="menubar-dropdown">
+                <span class="menubar-items" id="emo-music">
                     Emo Music
                 </span>
+                <div id="clock">
+                00:00 PM
+                </div>
             </nav>
+
             <div id="viewport">
                 <!--This is the pretend desktop-->
                 <div id="window">
                     <div id="titlebar">
-                        <img src="icons/close.bmp">
-                        <span id="taskbar-title">Title</span>
-                        <img src="icons/maximize.bmp">
+                        <img class="titlebar-controls" id="close" src="icons/close1.bmp" draggable="false">
+                        <span id="titlebar-title">About Me</span>
+                        <img class="titlebar-controls" id="maximize" src="icons/maximize1.bmp" draggable="false">
                     </div>
+
                     <!--This is where meaningful content goes-->
-                    hello im content
+                    <div id="about-content" class="content">
+                        <h3>Tyler Ramsawak</h3>
+                        <p>
+                            Welcome to my page! My name is Tyler Ramsawak and I'm a freshman Electrical Engineering
+                            major at the University of Florida. <img src="icons/tiny-gator.gif"> I've just completed my first semester!
+                        </p>
+                        <div class="about-block">
+                        <p>
+                            I enjoy playing the electric guitar and bass, and really would like to start an emo band
+                            with my friends at school. Perhaps something that sounds like a blend of reverent mid-west folk like the band
+                            The World is a Beautiful Place & I am no Longer Afraid to Die, the angst of the Front Bottoms, with Basement or 
+                            Sunny Day Realestate grit. idk! I've only been playing guitar and bass for a year, so I am not too good yet!
+                        </p>
+                        <img src="images/guitar.png">
+                        </div>
+                        <div class="about-block">
+                        <p>
+                            I collect reel to reel machines and other 70s equipment, too. I have 5 or so reel to reel reproducers and I I've
+                            naturally become quite good at repairing them and calibrating them. Calibration is quite fun, you get to return
+                            the machine to NAB standards which is always a good feeling. I feel like a mad scientist when I do it because of
+                            how complex it looks.
+                        </p>
+                        <img src="images/r2r.png">
+                        </div>
+                        <div class="about-block">
+                        <p>
+                            I also like to design my own electronics in KiCAD! I've made sooo many things, from simple stuff like amplifiers,
+                            to super complex multi-page 4G LTE telephones! I am actually in the process of redesigning my 4G LTE Motorola MicroTAC
+                            through the Blueprint program offered by Hack Club! It is unfortunately my last year of hack club, I would like to work for
+                            them!! Although I will become an EE, part of me wants to be a teacher for some reason. Mainly because I didn't have
+                            any electronics guidance in my formative years, and I'd like to help kids learn cool things (either an instrument or hardware).
+                            I can code, too, but not too well. Although I am good at CSS and Python, only. I am in a C++ class, so I can get my 
+                            embedded programs and real time operating systems ported to a better, faster language than Micropython.
+                            I love music and I collect vinyl!!!
+                            INSERT VINYL PIX
+                        </p>
+                        </div>
+                    </div>
+
                 </div>
+                <footer>
+                    <!-- uCounter.com Code Start
+                    <div><script language="javascript" src="https://yo.ucounter.com/25/mxlm/12/s/1/"></script><script language="javascript" src="https://ucounter.com/stat.js"></script></div>
+                    uCounter.com Code End -->
+                </footer>
             </div>
         </div>
     </body>
 </html>
 
+<!--startup sound-->
 <script>
 window.addEventListener("DOMContentLoaded", () => {
     const audio = document.getElementById("startup");
@@ -44,15 +94,90 @@ window.addEventListener("DOMContentLoaded", () => {
 });
 </script>
 
+<!--set and manage clock-->
+<script>
+    const clock = document.getElementById("clock");
+
+    const now = new Date();
+    var date = now.toLocaleDateString();
+
+    hour = ((now.getHours() + 11) % 12 + 1); //Posted by TomTom stackoverflow.com
+    var suffix = "AM";
+    if (hour >= 12) {
+        suffix = "PM";
+    };
+    var minute = now.getMinutes().toString().padStart(2, "0");
+    var time = hour + ":" + minute + " " + suffix;
+
+    clock.textContent = time;
+    var currentDisplay = "time";
+
+    clock.addEventListener("click", function() {
+        if (currentDisplay == "time") {
+            clock.textContent = date;
+            currentDisplay = "date";
+        }
+        else {
+            clock.textContent = time;
+            currentDisplay = "time";
+        };
+    });
+
+</script>
+
+<!--titlebar maximize and close buttons on mouse down-->
+<script>
+    const titlebarControls = document.getElementsByClassName("titlebar-controls");
+
+    for (var i = 0; i < titlebarControls.length; i++) {
+        titlebarControls[i].addEventListener("mousedown", function() {
+            this.src = "icons/click1.bmp"
+        });
+        titlebarControls[i].addEventListener("mouseup", function() {
+            console.log(this.id);
+            if (this.id == "close") {
+                this.src = "icons/close1.bmp"
+            }
+            else {
+                this.src = "icons/maximize1.bmp"
+            }
+        });
+    }
+</script>
+
+<!--menubar flash, set underline, and update titlebar title-->
+<script>
+    const menubarItems = document.getElementsByClassName("menubar-items");
+    const taskbarTitle = document.getElementById("titlebar-title");
+    var currentPageId = "about";
+    
+    for (var i = 0; i < menubarItems.length; i++) {
+        menubarItems[i].addEventListener("click", function() {
+            console.log(this.id + " add animation");
+            this.classList.add("flash");
+            
+            currentPage = document.getElementById(currentPageId);
+            currentPage.style = ""; //remove the underline from current page
+            this.style = "text-decoration: underline;"; //to add it to the one we clicked
+            currentPageId = this.id; //update current page
+            taskbarTitle.textContent = this.textContent; //update taskbar title
+        });
+        menubarItems[i].addEventListener("animationend", function() {
+            console.log(this.id + " animation remove");
+            this.classList.remove("flash");
+        });
+    };
+
+</script>
+
+<!--random background-->
 <script>
 const backgrounds = [
   "128.png",
-  "129.png",
   "130.png",
   "131.png",
   "132.png",
   "133.png",
-  "134.png",
   "136.png",
   "137.png",
   "139.png",
@@ -64,7 +189,6 @@ const backgrounds = [
   "147.png",
   "148.png",
   "149.png",
-  "150.png",
   "151.png",
   "547.png",
   "870.png",
@@ -75,7 +199,6 @@ const backgrounds = [
 ];
 
 const randomBackground = backgrounds[Math.floor(Math.random() * backgrounds.length)];
-let viewport = document.getElementById("viewport");
-console.log(viewport);
+const viewport = document.getElementById("viewport");
 viewport.style.backgroundImage = `url('backgrounds/${randomBackground}')`;
 </script>
