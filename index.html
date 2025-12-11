@@ -3,13 +3,14 @@
     <head>
         <link rel="stylesheet" href="styles.css">
         <link rel="icon" type="image/bmp" href="icons/logo2.bmp">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
     </head>
     <audio id="startup" src="sounds/StartupPowerMac.wav"></audio>
     <!--https://froods.ca/~dschaub/sound.html-->
     <body>
         <div id="screen">
             <nav id="menubar">
-                <img src="icons/logo2.bmp" draggable="false">
+                <img id="menubar-logo" src="icons/logo2.bmp" draggable="false">
                 <span class="menubar-items" id="about" style="text-decoration: underline;">
                     About Me
                 </span>
@@ -22,6 +23,10 @@
                 <span class="menubar-items" id="emo-music">
                     Emo Music
                 </span>
+                <div id="menubar-socials">
+                    <a href="https://www.youtube.com/@TylerRamsawak"><img src="images/youtube.svg"></a>
+                    <a href="https://www.github.com/TylerRamsawak"><img src="images/github.svg"></a>
+                </div>
                 <div id="clock">
                 00:00 PM
                 </div>
@@ -40,11 +45,12 @@
                     <div id="about-content" class="content">
                         <div class="tophand-content">
                             <div style="display: flex;">
-                                <h3>Tyler Ramsawak</h3><img src="images/face.JPG" style="max-height: 60px; margin-left: 20px;">
+                                <h3>Tyler Ramsawak<br>Electrical Engineer<br>University of Florida</h3><img src="images/face.jpg" style="max-height: 80px; margin-left: 20px;">
                             </div>
                             <p>
-                                Welcome to my page! My name is Tyler Ramsawak and I'm a freshman Electrical Engineering
-                                major at the University of Florida. <img src="icons/tiny-gator.gif"> I've just completed my first semester!
+                                <b>Specialties: Embedded Electronics Design | Analog Electronics Repair | Reel to Reel Calibration</b><br>
+                                Welcome to my page! My name is Tyler Ramsawak, and I'm a freshman Electrical Engineering
+                                major at the University of Florida. <img src="icons/tiny-gator.gif"><br>I've just completed my first semester!
                             </p>
                         </div>
                         <div class="bottomhand-content">
@@ -67,7 +73,7 @@
                                     through the Blueprint program offered by Hack Club! It is unfortunately my last year of hack club, I would like to work for
                                     them!! Although I will become an EE, part of me wants to be a teacher for some reason. Mainly because I didn't have
                                     any electronics guidance in my formative years, and I'd like to help kids learn cool things (either an instrument or hardware).
-                                    I can code, too, but not too well. Although I am good at CSS and Python, only. I am in a C++ class, so I can get my 
+                                    I can code, too, but not too well. Although I am good at Python and can barely write C. I am in a C++ class at school, so maybe I can get my 
                                     embedded programs and real time operating systems ported to a better, faster language than Micropython.
                                     I love music and I collect vinyl!!!
                                     <div class="images-horizontal-display">
@@ -105,11 +111,25 @@
                             <img src="images/biz-card-render.png">
                             <img src="images/biz-card-pcb.png">
                         </div>
+                        <h3>Automatic USB-Interfaced Typewriter (2024)</h3>
+                        <div class="images-horizontal-display">
+                            <video width="320" height="240" controls>
+                                <source src="videos/typewriter-video.mp4" type="video/mp4">
+                                Your browser does not support the video tag.
+                            </video>
+                            <img src="images/typewriter-pcb.png">
+                            <img src="images/typewriter-weezer.png">
+                        </div>
                         <h3>Cigar Box Electric Guitar Amp (2025)</h3>
                         <div class="images-horizontal-display">
                             <img src="images/amp-pcb.png">
                             <img src="images/amp-box.png">
                             <img src="images/amp-pcb2.png">
+                        </div>
+                        <h3>Morse Code Shoes (2023)</h3>
+                        <div class="images-horizontal-display">
+                            <img src="images/shoes-1.png">
+                            <img src="images/shoes-2.png">
                         </div>
                     </div>
                     <div id="hobbies-content" class="content" style="display: none;">
@@ -124,7 +144,8 @@
                             <li>I crochet exclusively shrimp</li>
                         </ul>
                         <h3>Lightbulbs</h3>
-                        <p>I have 9 90W Low-Pressure Sodium Bulbs (LPS), 2 180W LPS, 6 1000W Metal-Halides (MH), 2 450W MH, 2 100W HPS, and 1 exit sign</p>
+                        <p>I have 9x 90W Low-Pressure Sodium Bulbs (LPS), 2x 180W LPS, 6x 1000W Metal-Halides (MH),
+                            2x 450W MH, 2x 100W HPS, and 1x exit sign</p>
                         <div class="images-horizontal-display">
                             <img src="images/lps1.png">
                             <img src="images/lps2.png">
@@ -135,7 +156,7 @@
                             I have more than the two here, but these are my favorite</p>
                         <div class="images-horizontal-display">
                             <video width="320" height="240" controls>
-                                <source src="images/r2r-video.mp4" type="video/mp4">
+                                <source src="videos/r2r-video.mp4" type="video/mp4">
                                 Your browser does not support the video tag.
                             </video>
                             <img src="images/r2r-couple.png">
@@ -143,7 +164,22 @@
                         </div>
                     </div>
                     <div id="emo-music-content" class="content" style="display: none;">
-                        emo music page
+                        <p>Me and my friends play songs sometimes. Here are a couple of them (theyre not good yet!!).
+                            And then there are some of my favorite album covers below :P</p>
+                        <div class="images-horizontal-display">
+                            <video width="320" height="240" controls>
+                                <source src="videos/arthur-coffee.mp4" type="video/mp4">
+                            </video>
+                            <video width="320" height="240" controls>
+                                <source src="videos/haunt-you.MP4" type="video/mp4">
+                            </video>
+                            <video width="320" height="240" controls>
+                                <source src="videos/bojack.MP4" type="video/mp4">
+                            </video>
+                            <video width="320" height="240" controls>
+                                <source src="videos/tyler bass.MOV" type="video/mp4">
+                            </video>
+                        </div>
                     </div>
 
                 </div>
@@ -281,5 +317,4 @@ const backgrounds = [
 const randomBackground = backgrounds[Math.floor(Math.random() * backgrounds.length)];
 const viewport = document.getElementById("viewport");
 viewport.style.backgroundImage = `url('backgrounds/${randomBackground}')`;
-
 </script>
