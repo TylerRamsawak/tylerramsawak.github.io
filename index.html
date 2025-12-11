@@ -40,7 +40,7 @@
                     <div id="about-content" class="content">
                         <div class="tophand-content">
                             <div style="display: flex;">
-                                <h3>Tyler Ramsawak</h3><img src="images/face.JPG" style="max-height: 60px; margin-left: 20px;">
+                                <h3>Tyler Ramsawak</h3><img src="images/face.jpg" style="max-height: 60px; margin-left: 20px;">
                             </div>
                             <p>
                                 Welcome to my page! My name is Tyler Ramsawak and I'm a freshman Electrical Engineering
@@ -82,6 +82,68 @@
                                 <img src="images/r2r-cal.JPEG">
                             </div>
                         </div>
+                    </div>
+                    <div id="projects-content" class="content" style="display: none;">
+                        <p>I've been making electronics since I was maybe 8! Here are some of them:</p>
+                        <h3>Motorola MicroTAC 9800X 4G LTE Retrofit (2023)</h3>
+                        <div class="images-horizontal-display">
+                            <img src="images/microtac-bob.png">
+                            <img src="images/microtac-paste.png">
+                            <img src="images/microtac-pcb.png">
+                            <img src="images/microtac-shell.png">
+                            <img src="images/microtac-dynatac.png">
+                        </div>
+                        <h3>HDSP-211X Display Driver & Library (2025)</h3>
+                        <div class="images-horizontal-display">
+                            <img src="images/hdsp-name.png">
+                            <img src="images/hdsp-copper.png">
+                            <img src="images/hdsp-reflow.png">
+                            <img src="images/hdsp-microscope.png">
+                        </div>
+                        <h3>NFC Business Cards (2025)</h3>
+                        <div class="images-horizontal-display">
+                            <img src="images/biz-card-render.png">
+                            <img src="images/biz-card-pcb.png">
+                        </div>
+                        <h3>Cigar Box Electric Guitar Amp (2025)</h3>
+                        <div class="images-horizontal-display">
+                            <img src="images/amp-pcb.png">
+                            <img src="images/amp-box.png">
+                            <img src="images/amp-pcb2.png">
+                        </div>
+                    </div>
+                    <div id="hobbies-content" class="content" style="display: none;">
+                        <p>I have many many hobbies!!</p>
+                        <ul>
+                            <li>I collect rare lightbulbs</li>
+                            <li>I collect, repair, and calibrate reel to reel reproducers</li>
+                            <li>I play the electric guitar and bass guitar</li>
+                            <li>I like to record my own music on my A3340S or onto the PC</li>
+                            <li>I enjoy minecraft with friends</li>
+                            <li>I design, fabricate, and debug custom electronics</li>
+                            <li>I crochet exclusively shrimp</li>
+                        </ul>
+                        <h3>Lightbulbs</h3>
+                        <p>I have 9 90W Low-Pressure Sodium Bulbs (LPS), 2 180W LPS, 6 1000W Metal-Halides (MH), 2 450W MH, 2 100W HPS, and 1 exit sign</p>
+                        <div class="images-horizontal-display">
+                            <img src="images/lps1.png">
+                            <img src="images/lps2.png">
+                            <img src="images/exit-sign.png">
+                        </div>
+                        <h3>Reel to Reel</h3>
+                        <p>I love reel to reel machines because they're so pretty to watch, and I believe they have a lovely sound.
+                            I have more than the two here, but these are my favorite</p>
+                        <div class="images-horizontal-display">
+                            <video width="320" height="240" controls>
+                                <source src="images/r2r-video.mp4" type="video/mp4">
+                                Your browser does not support the video tag.
+                            </video>
+                            <img src="images/r2r-couple.png">
+                            <img src="images/r2r-x10r.png">
+                        </div>
+                    </div>
+                    <div id="emo-music-content" class="content" style="display: none;">
+                        emo music page
                     </div>
 
                 </div>
@@ -154,7 +216,7 @@ window.addEventListener("DOMContentLoaded", () => {
     }
 </script>
 
-<!--menubar flash, set underline, and update titlebar title-->
+<!--menubar flash, set underline, and update window and titlebar content-->
 <script>
     const menubarItems = document.getElementsByClassName("menubar-items");
     const taskbarTitle = document.getElementById("titlebar-title");
@@ -165,11 +227,20 @@ window.addEventListener("DOMContentLoaded", () => {
             console.log(this.id + " add animation");
             this.classList.add("flash");
             
-            currentPage = document.getElementById(currentPageId);
-            currentPage.style = ""; //remove the underline from current page
+            //remove the current underline and add an underline to the new menubar item
+            currentPageMenubarItem = document.getElementById(currentPageId);
+            currentPageMenubarItem.style = ""; //remove the underline from current page
             this.style = "text-decoration: underline;"; //to add it to the one we clicked
-            currentPageId = this.id; //update current page
-            taskbarTitle.textContent = this.textContent; //update taskbar title
+
+            //change page content in content div
+            let currentPageContent = document.getElementById(currentPageId + "-content");
+            currentPageContent.style = "display: none;"
+            let newPageContent = document.getElementById(this.id + "-content");
+            newPageContent.style = "display: block";
+
+            //update titlebar title
+            taskbarTitle.textContent = this.textContent;
+            currentPageId = this.id;
         });
         menubarItems[i].addEventListener("animationend", function() {
             console.log(this.id + " animation remove");
@@ -210,7 +281,4 @@ const backgrounds = [
 const randomBackground = backgrounds[Math.floor(Math.random() * backgrounds.length)];
 const viewport = document.getElementById("viewport");
 viewport.style.backgroundImage = `url('backgrounds/${randomBackground}')`;
-
 </script>
-
-
