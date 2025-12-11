@@ -6,10 +6,6 @@
     font-family: 'Chicago';
     src: url('fonts/sysfont.otf');
 }
-@font-face {
-    font-family: 'Sanfranciso';
-    src: url('fonts/Sanfrisco.ttf') format('truetype');
-}
 
 html {
     cursor: url("cursors/arrow.cur"), auto;
@@ -36,6 +32,7 @@ footer {
     width: 100vw;
     height: 100vh;
     background-color: white;
+    overflow: hidden;
 
     /*https://pixelcorners.lukeb.co.uk/?radius=8&multiplier=2*/
     clip-path: polygon(
@@ -85,6 +82,7 @@ footer {
     background-image: url("backgrounds/10042.png");
     background-repeat: repeat;
     height: 100%;
+    overflow:hidden;
 }
 
 #menubar {
@@ -100,6 +98,8 @@ footer {
 .menubar-items {
     margin-left: 20px;
     user-select: none;
+    text-overflow: clip;
+    white-space: nowrap;
 }
 
 .menubar-items:hover {
@@ -140,7 +140,9 @@ footer {
     background-color: white;
     border: 2px solid black;
     box-shadow: 2px 2px black;
-    height: 92%;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
 }
 
 #titlebar {
@@ -155,11 +157,6 @@ footer {
     image-rendering: pixelated;
     background-repeat: repeat-x;
     background-size: contain;
-}
-
-.content {
-    font-family: "Chicago", auto;
-    padding: 10px;
 }
 
 .titlebar-controls {
@@ -186,8 +183,63 @@ footer {
 }
 
 /*CONTENT STYLING*/
-.about-block {
-    color: red;
+.content {
+    font-family: "Chicago", auto;
+    padding: 10px;
     display: flex;
-    align-items: center;
+    flex-direction: column;
+    max-width: 100%;
+    overflow-y: auto;
+    overflow-x: hidden;
+}
+
+.content img {
+    max-width: 100%;   /* never wider than container */
+    height: auto;      /* maintain aspect ratio */
+    width: auto;       /* maintain aspect ratio */
+    object-fit: contain; /* scales down while keeping aspect ratio */
+}
+
+.tophand-content img {
+    display: inline-block;
+}
+
+.bottomhand-content {
+    display: flex;
+}
+
+.lefthand-content {
+    width: 80%;
+}
+.righthand-content {
+    width: 20%;
+}
+
+.images-horizontal-display {
+    display: flex;
+    overflow-x: auto;
+}
+
+.images-horizontal-display img {
+    display: block;
+    max-height: 300px;
+    height: auto;
+}
+
+@media only screen and (max-width: 620px) {
+    #clock {
+        display: none;
+    }
+    #window {
+        margin: 0;
+    }
+    footer {
+        display: 0;
+    }
+}
+
+@media only screen and (max-width: 520px) {
+    #menubar {
+        display: none;
+    }
 }
