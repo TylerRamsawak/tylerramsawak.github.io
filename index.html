@@ -232,6 +232,46 @@
     </body>
 </html>
 
+<!--calculate the width of gallery image carousels to determine if we need scroll buttons-->
+<script>
+    //refresh gallery widths on resize
+    var resizeTimer;
+    window.addEventListener('resize', () => {
+        clearTimeout(resizeTimer);
+        resizeTimer = setTimeout(() => {
+        updateGalleries();
+        });
+    });
+
+    function updateGalleries() {
+        const galleries = document.getElementsByClassName("gallery-container");
+        //console.log("Number of Galleries: " + galleries.length)   
+        for (var i = 0; i < galleries.length; i++) {
+            const galleryImages = galleries[i].querySelector(".gallery-images"); //these gallery-images have new widths
+            const visibleWidth = galleryImages.clientWidth; //gets width that is visible to user
+            const totalWidth = galleryImages.scrollWidth; //gets total width that is hidden under x-overflow
+
+            const buttonLeft = galleryContainers[i].querySelector(".image-left");
+            const buttonRight = galleryContainers[i].querySelector(".image-right");
+            
+            if (visibleWidth > 0){ //gallery-images with display:none returns 0, so filter those out
+                console.log("Visible width: " + visibleWidth);
+                console.log("Total width: " + totalWidth);
+                if (totalWidth -10 > visibleWidth) { //the -10 clips a bit of the image to fit
+                    console.log("add buttons");
+                    buttonLeft.style = "display: block;";
+                    buttonRight.style = "display: block;";
+                } else {
+                    console.log("hide buttons")
+                    buttonLeft.style = "display: none;";
+                    buttonRight.style = "display: none;";
+                };
+            };
+        };
+    };
+</script>
+
+<!--handles gallery image carousels left and right buttons-->
 <script>
     const galleryContainers = document.getElementsByClassName("gallery-container");
     var currentPosition = 0; //the page starts with images all the way left
@@ -324,10 +364,13 @@
     const menubarItems = document.getElementsByClassName("menubar-items");
     const taskbarTitle = document.getElementById("titlebar-title");
     var currentPageId = "about";
+
+    //update galleries on the about page
+    
     
     for (var i = 0; i < menubarItems.length; i++) {
         menubarItems[i].addEventListener("click", function() {
-            console.log(this.id + " add animation");
+            //console.log(this.id + " add animation");
             this.classList.add("flash");
             
             //remove the current underline and add an underline to the new menubar item
@@ -344,13 +387,20 @@
             //update titlebar title
             taskbarTitle.textContent = this.textContent;
             currentPageId = this.id;
+
+            //update clientWidth of the image galleries now thay display is not none
+            updateGalleries();
         });
         menubarItems[i].addEventListener("animationend", function() {
-            console.log(this.id + " animation remove");
+            //console.log(this.id + " animation remove");
             this.classList.remove("flash");
         });
     };
-
+    //wait until all images are loaded to update the width of the galleries.
+    //previously, the page would update galleries before images loaded, causing gallery widths to be 0
+    window.addEventListener('load', function () {
+        updateGalleries();
+    })
 </script>
 
 <!--random background-->
