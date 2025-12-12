@@ -232,15 +232,14 @@
     </body>
 </html>
 
-<!--calculate the width of gallery image carousels to determine if we need scroll buttons-->
+<!--recompute the width of gallery-image carousels to determine if we need buttons or not-->
 <script>
-    //refresh gallery widths on resize
     var resizeTimer;
     window.addEventListener('resize', () => {
         clearTimeout(resizeTimer);
         resizeTimer = setTimeout(() => {
         updateGalleries();
-        });
+        }, 500);
     });
 
     function updateGalleries() {
@@ -258,7 +257,7 @@
                 console.log("Visible width: " + visibleWidth);
                 console.log("Total width: " + totalWidth);
                 if (totalWidth -10 > visibleWidth) { //the -10 clips a bit of the image to fit
-                    console.log("add buttons");
+                    console.log("show buttons");
                     buttonLeft.style = "display: block;";
                     buttonRight.style = "display: block;";
                 } else {
